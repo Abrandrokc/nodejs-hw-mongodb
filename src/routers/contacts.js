@@ -8,5 +8,5 @@ const contactRouters = express.Router()
 contactRouters.get("/:contactId", ctrlWrapper(getByIdRoute))
 contactRouters.post("/", ctrlWrapper(postContactsRoute))
 contactRouters.patch("/:contactId", ctrlWrapper(patchContactsRoute))
-     contactRouters.delate("/:contactId", ctrlWrapper(deleteContactsRoute))
+     contactRouters.delete("/:contactId", ctrlWrapper(deleteContactsRoute))
 export default contactRouters
