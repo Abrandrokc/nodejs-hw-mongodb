@@ -55,7 +55,7 @@ export const patchContactsRoute = async (req, res) => {
         }
     )
 }
-export const deleteContactsRoute= async (req, res) => {
+export const deleteContactsRoute = async (req, res) => {
     const id = req.params
     const result = await deleteContacts({ _id: id })
     if (!result) {
