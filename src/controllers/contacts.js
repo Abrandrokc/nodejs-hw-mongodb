@@ -1,5 +1,9 @@
 import createHttpError from "http-errors";
 import { getContactsId, getContacts, postContacts,  patchContacts, deleteContacts } from "../services/contacts.js";
+import parsePaginationParams from "../utils/parsPaginationsParams.js";
+import parseSortParams from "../utils/parseSortParams.js";
+import parseContactsFitlerParams from "../utils/parseContactFilterParams.js";
+import { contactListField } from "./const.js";
 
 export const getByIdRoute = async (req, res) => {
         const { contactId } = req.params;
@@ -19,8 +23,18 @@ export const getByIdRoute = async (req, res) => {
 
     }
 export const getContactsRoute= async (req, res) => {
+  const { query } = req;
+    const { page, perPage } = parsePaginationParams(query);
+    const { sortBy, sortOrder } = parseSortParams(query, contactListField);
+    const filter = parseContactsFitlerParams(query);
 
-        const data = await getContacts()
+    const data = await getContacts({
+        page,
+        perPage,
+        sortBy,
+        sortOrder,
+        filter,
+    });
         res.json({
             status: 200,
             data,

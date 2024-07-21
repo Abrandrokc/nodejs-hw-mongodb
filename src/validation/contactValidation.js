@@ -10,3 +10,12 @@ export const contactAddShema = Joi.object({
 
 
 })
+export const contactUpdateSchema = Joi.object({
+    name: Joi.string().min(3).max(20),
+    phoneNumber: Joi.string().min(3).max(20).pattern(rex),
+    email: Joi.string().min(3).max(20),
+    isFavourite: Joi.string().min(3).max(20),
+    contactType:Joi.string().min(3).max(20).valid(...en),
+
+
+});
