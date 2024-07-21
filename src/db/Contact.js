@@ -1,4 +1,6 @@
 import { model, Schema } from "mongoose";
+import { mongoError } from "../utils/hook.js";
+import { en, rex } from "../controllers/const.js";
 const contactSchema = new Schema(
   {
     name: {
@@ -6,7 +8,8 @@ const contactSchema = new Schema(
       required: true
     },
     phoneNumber: {
-      type: String,
+        type: String,
+        match:   rex,
       required: true
     },
     email: {
@@ -19,7 +22,7 @@ const contactSchema = new Schema(
     },
     contactType: {
       type: String,
-      enum: ['work', 'home', 'personal'],
+      enum: en,
       required: true,
       default: 'personal'
     }
@@ -27,10 +30,17 @@ const contactSchema = new Schema(
   {
       timestamps: true,
       versionKey: false,
-     
-  }
-);
 
+  }
+
+);
+contactSchema.post("save", mongoError)
+contactSchema.post("findOneAndUpdate", function (next) {
+    this.opthions.new = true
+    this.opthions.runValidators = true
+    next()
+})
+contactSchema.post("findOneAndUpdate", mongoError)
 
 const Contact = model("contact", contactSchema);
 
