@@ -9,6 +9,7 @@ const errorHandler = (error, req, res, next) => {
             data: error,
 
         })
+        return
     }
  const { status = 500, massege= "Somethink wrong" } = error
         res.status(status).json({

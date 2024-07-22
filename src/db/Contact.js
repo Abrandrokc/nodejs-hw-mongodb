@@ -1,6 +1,5 @@
 import { model, Schema } from "mongoose";
-import { mongoError } from "../utils/hook.js";
-import { en, rex } from "../controllers/const.js";
+import {  rex } from "../controllers/const.js";
 const contactSchema = new Schema(
   {
     name: {
@@ -22,7 +21,7 @@ const contactSchema = new Schema(
     },
     contactType: {
       type: String,
-      enum: en,
+      enum: ['work', 'home', 'personal'],
       required: true,
       default: 'personal'
     }
@@ -34,14 +33,6 @@ const contactSchema = new Schema(
   }
 
 );
-contactSchema.post("save", mongoError)
-contactSchema.post("findOneAndUpdate", function (next) {
-    this.opthions.new = true
-    this.opthions.runValidators = true
-    next()
-})
-contactSchema.post("findOneAndUpdate", mongoError)
-
 const Contact = model("contact", contactSchema);
 
 export default Contact;
