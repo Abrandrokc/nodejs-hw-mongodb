@@ -7,11 +7,11 @@ import contactRouters from "./routers/contacts.js";
 import notFoundHandler from "./middleware/notFoundHandler.js";
 import errorHandler from "./middleware/errorHandler.js";
 
-
+const port = env("PORT","3000")
 
 export default function setupServer() {
     dotenv.config()
-    const port = env("PORT","3000")
+
 
     const app = express()
     app.use(express.json())

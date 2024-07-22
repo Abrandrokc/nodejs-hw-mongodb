@@ -56,7 +56,7 @@ export const postContactsRoute = async (req, res) => {
     )
 }
 export const patchContactsRoute = async (req, res) => {
-    const id = req.params
+    const { contactId } = req.params
     const result = await patchContacts({ _id: id }, req.body)
        if (!result) {
         throw createHttpError(404, "Contact not found")
@@ -69,17 +69,20 @@ export const patchContactsRoute = async (req, res) => {
         }
     )
 }
-export const deleteContactsRoute= async (req, res) => {
-    const id = req.params
-    const result = await deleteContacts({ _id: id })
+export const deleteContactsRoute = async (req, res) => {
+    const { contactId } = req.params;
+
+
+    const result = await deleteContacts({ _id: contactId });
+
     if (!result) {
-        throw createHttpError(404, "Contact not found")
 
+        throw createHttpError(404, "Contact not found");
     }
-res.status(204).json(
-        {status: 204,
-	message: "Successfully delete a contact!",
 
-        }
-    )
-}
+
+    res.status(204).json({
+        status: 204,
+        message: "Successfully deleted a contact!"
+    });
+};
