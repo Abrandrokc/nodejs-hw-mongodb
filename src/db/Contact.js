@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import {  rex } from "../controllers/const.js";
+
 const contactSchema = new Schema(
   {
     name: {
@@ -8,7 +8,7 @@ const contactSchema = new Schema(
     },
     phoneNumber: {
         type: String,
-        match:   rex,
+
       required: true
     },
     email: {
