@@ -11,7 +11,9 @@ export const getContacts = async ({ filter, page, perPage, sortBy = contactListF
         databaseQuery.where("favorite").equals(filter.favorite);
     }
      const items = await databaseQuery.skip(skip).limit(perPage).sort({[sortBy]: sortOrder});
-    const totalItems = await Contact.find().merge(databaseQuery).countDocuments();
+
+
+    const totalItems = await Contact.find(databaseQuery.getQuery()).countDocuments();
     const {totalPages, hasNextPage, hasPrevPage} = calcPagnationData({total: totalItems, perPage, page});
 
     return {
