@@ -1,6 +1,7 @@
 import { sortOrderList } from "../controllers/const.js";
 
 
+
 const parseSortParams = ({ sortOrder, sortBy }, fieldList) => {
     const parsedSortOrder = sortOrderList.includes(sortOrder) ? sortOrder : sortOrderList[0];
     const parsedSortBy = fieldList.includes(sortBy) ? sortBy : fieldList[0];
@@ -12,3 +13,4 @@ const parseSortParams = ({ sortOrder, sortBy }, fieldList) => {
 }
 
 export default parseSortParams;
+

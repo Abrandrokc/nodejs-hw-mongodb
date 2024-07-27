@@ -23,7 +23,8 @@ export const getByIdRoute = async (req, res) => {
 
     }
 export const getContactsRoute= async (req, res) => {
-  const { query } = req;
+    const { query } = req;
+    
     const { page, perPage } = parsePaginationParams(query);
     const { sortBy, sortOrder } = parseSortParams(query, contactListField);
     const filter = parseContactsFitlerParams(query);
