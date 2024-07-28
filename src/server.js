@@ -7,7 +7,7 @@ import env from "./utils/env.js";
 import contactRouters from "./routers/contacts.js";
 import notFoundHandler from "./middleware/notFoundHandler.js";
 import errorHandler from "./middleware/errorHandler.js";
-import auth from "./routers/auth-router.js";
+import authRouter from "./routers/auth-router.js";
 
 const port = env("PORT", "3000");
 
@@ -16,8 +16,6 @@ export default function setupServer() {
 
     const app = express();
     app.use(express.json());
-    app.use(cookieParser());
-    app.use(cors());
     app.use(
         pino({
             transport: {
@@ -25,7 +23,10 @@ export default function setupServer() {
             },
         }),
     );
-    app.use("/auth", auth);
+    app.use(cookieParser());
+    app.use(cors());
+
+    app.use("/auth", authRouter);
     app.use("/contacts", contactRouters);
     app.use(notFoundHandler);
     app.use(errorHandler);
