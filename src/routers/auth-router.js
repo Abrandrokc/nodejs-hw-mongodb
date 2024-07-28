@@ -3,13 +3,13 @@ import ctrlWrapper from "../utils/ctrlWrapper.js";
 import {userSignupSchema, userSigninSchema} from  "../validation/user.js"
 import validateBody from "../middleware/validateBody.js";
 import { refreshController, signinController, signoutController, signupController } from "../controllers/auth.js";
-const authRouter = Router();
+const auth = Router();
 
-authRouter.post("/register", validateBody(userSignupSchema), ctrlWrapper(signupController));
+auth.post("/register", validateBody(userSignupSchema), ctrlWrapper(signupController));
 
-authRouter.post("/login", validateBody(userSigninSchema), ctrlWrapper(signinController))
+auth.post("/login", validateBody(userSigninSchema), ctrlWrapper(signinController))
 
-authRouter.post("/refresh", ctrlWrapper(refreshController));
+auth.post("/refresh", ctrlWrapper(refreshController));
 
-authRouter.post("/logout", ctrlWrapper(signoutController))
-export default authRouter;
+auth.post("/logout", ctrlWrapper(signoutController))
+export default auth;
