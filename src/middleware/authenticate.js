@@ -1,6 +1,6 @@
 import createHttpError from "http-errors";
-import { findSession } from "../services/session";
-import { findUser } from "../services/auth";
+import { findSession } from "../services/session.js";
+import { findUser } from "../services/auth.js";
 
 
 
