@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 import { mongooseSaveError, setUpdateSettings } from "../utils/hook.js";
-import { email } from "../controllers/const.js";
+import {  email } from "../controllers/const.js";
 
 
 
@@ -19,7 +19,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+
 }, {versionKey: false, timestamps: true});
 
 userSchema.post("save", mongooseSaveError);
