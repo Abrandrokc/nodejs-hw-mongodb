@@ -8,8 +8,11 @@ export const mongooseSaveError = (error, data, next)=> {
     next();
 }
 
-export const setUpdateSettings = function(next){
-    this.options.new = true;
-    this.options.runValidators = true;
+export const setUpdateSettings =  function(next) {
+   
+    this.setOptions({
+        new: true,
+        runValidators: true
+    });
     next();
-}
+};

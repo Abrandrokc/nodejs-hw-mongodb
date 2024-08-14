@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { mongoError } from "../utils/hook.js";
+import { mongoError, setUpdateSettings } from "../utils/hook.js";
 import { en, rex } from "../controllers/const.js";
 const contactSchema = new Schema(
   {
@@ -40,11 +40,7 @@ const contactSchema = new Schema(
 
 );
 contactSchema.post("save", mongoError)
-contactSchema.post("findOneAndUpdate", function (next) {
-    this.opthions.new = true
-    this.opthions.runValidators = true
-    next()
-})
+contactSchema.pre("findOneAndUpdate", setUpdateSettings)
 contactSchema.post("findOneAndUpdate", mongoError)
 
 const Contact = model("contact", contactSchema);

@@ -55,21 +55,28 @@ export const postContactsRoute = async (req, res) => {
 export const patchContactsRoute = async (req, res) => {
   const { contactId } = req.params;
   const { _id: userId } = req.user;
+    console.log("contactId", req.params)
+    console.log('Request body:', req.body)
 
-  const result = await patchContacts({ _id: contactId, userId }, req.body);
+    const result = await patchContacts({ _id: contactId, userId }, req.body);
+
+
   if (!result) {
     throw createHttpError(404, "Contact not found");
   }
+
   res.status(200).json({
     status: 200,
     message: "Successfully patched a contact!",
-    data: result.data
+    data: result
   });
+        console.log('Patch result:', result);
 };
 
 export const deleteContactsRoute = async (req, res) => {
   const { contactId } = req.params;
   const { _id: userId } = req.user;
+
 
   const result = await deleteContacts({ _id: contactId, userId });
   if (!result) {

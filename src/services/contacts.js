@@ -32,18 +32,24 @@ export const getContactsId = (contactId, userId) => Contact.findOne({ _id: conta
 export const postContacts = data => Contact.create(data);
 
 export const patchContacts = async (filter, data, options = {}) => {
-  const result = await Contact.findOneAndUpdate(filter, data, {
-    new: true,
-    runValidators: true,
-    includeResultMetadata: true,
-    ...options
-  });
-  if (!result || !result.value) return null;
-  const isNew = Boolean(result?.lastErrorObject?.upserted);
-  return {
-    data: result.value,
-    isNew
-  };
+    try {
+        const result = await Contact.findOneAndUpdate(filter, data, {
+              includeResultMetadata: true,
+            ...options
+        });
+        if (!result || !result.value) {
+            console.log("No document found to update.");
+            return null;
+        }
+        const isNew = Boolean(result.lastErrorObject?.upserted);
+        return {
+            data: result.value,
+            isNew
+        };
+    } catch (error) {
+        console.error("Error updating contact:", error);
+        throw error; 
+    }
 };
 
 export const deleteContacts = filter => Contact.findOneAndDelete(filter);
