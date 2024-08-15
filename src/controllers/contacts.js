@@ -4,6 +4,8 @@ import parsePaginationParams from "../utils/parsPaginationsParams.js";
 import parseSortParams from "../utils/parseSortParams.js";
 import parseContactsFitlerParams from "../utils/parseContactFilterParams.js";
 import { contactListField } from "./const.js";
+import { saveFileToCloudinary } from "../utils/saveFileToCloudinary.js";
+import env from "../utils/env.js";
 
 export const getByIdRoute = async (req, res) => {
   const { contactId } = req.params;
@@ -55,10 +57,20 @@ export const postContactsRoute = async (req, res) => {
 export const patchContactsRoute = async (req, res) => {
   const { contactId } = req.params;
   const { _id: userId } = req.user;
-    console.log("contactId", req.params)
-    console.log('Request body:', req.body)
+  const photo = req.file;
+  let photoUrl;
+  if (photo) {
+    if (env('ENABLE_CLOUDINARY') === 'true') {
+      photoUrl = await saveFileToCloudinary(photo);
+    } else {
+      photoUrl = await saveFileToUploadDir(photo);
+    }
+  }
 
-    const result = await patchContacts({ _id: contactId, userId }, req.body);
+    const result = await patchContacts({ _id: contactId, userId }, {
+    ...req.body,
+    photo: photoUrl,
+  });
 
 
   if (!result) {
@@ -87,3 +99,4 @@ export const deleteContactsRoute = async (req, res) => {
     message: "Successfully deleted a contact!"
   });
 };
+
