@@ -71,8 +71,8 @@ export const patchContactsRoute = async (req, res) => {
     ...req.body,
     photo: photoUrl,
   });
-
-
+console.log(result)
+console.log(photoUrl)
   if (!result) {
     throw createHttpError(404, "Contact not found");
   }
