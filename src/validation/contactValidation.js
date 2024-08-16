@@ -20,4 +20,4 @@ export const contactUpdateSchema = Joi.object({
      photo:Joi.string()
 
 
-}).or('name', 'phoneNumber', 'email', 'isFavourite', 'contactType')
+})
