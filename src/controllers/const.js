@@ -29,4 +29,4 @@ export const CLOUDINARY = {
   API_SECRET: 'API_SECRET',
 };
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
-export const TEMP_UPLOAD_DIR = path.resolve("src", "templates");
+export const TEMP_UPLOAD_DIR = path.resolve("src", "temp");

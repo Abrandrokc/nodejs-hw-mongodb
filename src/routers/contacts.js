@@ -14,7 +14,7 @@ contactRouters.use(authenticate);
 contactRouters.get("/", ctrlWrapper(getContactsRoute));
 contactRouters.get("/:contactId", isValidId, ctrlWrapper(getByIdRoute));
 contactRouters.post("/", upload.single("photo"), validateBody(contactAddShema), ctrlWrapper(postContactsRoute));
-contactRouters.patch("/:contactId", isValidId, validateBody(contactUpdateSchema), ctrlWrapper(patchContactsRoute));
+contactRouters.patch("/:contactId",upload.single("photo"), isValidId, validateBody(contactUpdateSchema), ctrlWrapper(patchContactsRoute));
 contactRouters.delete("/:contactId", isValidId, ctrlWrapper(deleteContactsRoute));
 
 export default contactRouters;

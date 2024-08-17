@@ -4,7 +4,7 @@ import parsePaginationParams from "../utils/parsPaginationsParams.js";
 import parseSortParams from "../utils/parseSortParams.js";
 import parseContactsFitlerParams from "../utils/parseContactFilterParams.js";
 import { contactListField } from "./const.js";
-import { saveFileToCloudinary } from "../utils/saveFileToCloudinary.js";
+import  saveFileToCloudinary  from "../utils/saveFileToCloudinary.js";
 import env from "../utils/env.js";
 
 export const getByIdRoute = async (req, res) => {
@@ -46,7 +46,10 @@ export const getContactsRoute = async (req, res) => {
 
 export const postContactsRoute = async (req, res) => {
   const { _id: userId } = req.user;
-  const data = await postContacts({ ...req.body, userId });
+  const photo = req.file;
+  let photoUrl;
+  if(req.file){photoUrl = await saveFileToCloudinary(photo, "photo");}
+  const data = await postContacts({ ...req.body, userId, photo });
   res.status(201).json({
     status: 201,
     message: "Successfully created a contact!",
@@ -57,21 +60,18 @@ export const postContactsRoute = async (req, res) => {
 export const patchContactsRoute = async (req, res) => {
   const { contactId } = req.params;
   const { _id: userId } = req.user;
+  console.log(req.file)
   const photo = req.file;
   let photoUrl;
-  if (photo) {
-    if (env('ENABLE_CLOUDINARY') === 'true') {
-      photoUrl = await saveFileToCloudinary(photo);
-    } else {
-      photoUrl = await saveFileToUploadDir(photo);
-    }
-  }
+  if(req.file){photoUrl = await saveFileToCloudinary(photo, "photo");}
+
+
 
     const result = await patchContacts({ _id: contactId, userId }, {
     ...req.body,
     photo: photoUrl,
   });
-console.log(result)
+console.log(photo)
 console.log(photoUrl)
   if (!result) {
     throw createHttpError(404, "Contact not found");
@@ -80,9 +80,9 @@ console.log(photoUrl)
   res.status(200).json({
     status: 200,
     message: "Successfully patched a contact!",
-    data: result
+    data: result.data
   });
-        console.log('Patch result:', result);
+
 };
 
 export const deleteContactsRoute = async (req, res) => {
