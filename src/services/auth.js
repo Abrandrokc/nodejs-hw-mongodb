@@ -1,12 +1,15 @@
-import { env } from "process";
+import  env  from "../utils/env.js";
 import User from "../db/user.js";
 import { hashValue } from "../utils/hash.js";
-import { SMTP } from "../controllers/const.js";
+import { SMTP, TEMPLATES_DIR } from "../controllers/const.js";
 import jwt from 'jsonwebtoken';
 import { sendEmail } from "../utils/sendMail.js";
 import handlebars from 'handlebars';
 import path from 'node:path';
 import fs from 'node:fs/promises';
+import bcrypt from 'bcrypt';
+import createHttpError from "http-errors";
+
 
 export const signup = async (data) => {
     const { password } = data;
@@ -29,7 +32,8 @@ const resetToken = jwt.sign(
       expiresIn: '15m',
     },
   );
-
+  console.log(env('JWT_SECRET'))
+  console.log(resetToken)
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
@@ -55,11 +59,12 @@ const resetToken = jwt.sign(
 
 export const resetPassword = async (payload) => {
   let entries;
-
+  console.log(payload.token)
+  console.log(env('JWT_SECRET'))
   try {
     entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (err) {
-    if (err instanceof Error) throw createHttpError(401, err.message);
+    if (err instanceof Error) throw createHttpError(401, "heta");
     throw err;
   }
 

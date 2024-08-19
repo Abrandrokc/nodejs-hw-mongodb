@@ -48,8 +48,9 @@ export const postContactsRoute = async (req, res) => {
   const { _id: userId } = req.user;
   const photo = req.file;
   let photoUrl;
-  if(req.file){photoUrl = await saveFileToCloudinary(photo, "photo");}
-  const data = await postContacts({ ...req.body, userId, photo });
+  if (req.file) { photoUrl = await saveFileToCloudinary(photo, "photo"); }
+  console.log(photo)
+  const data = await postContacts({ ...req.body, userId,  photo: photoUrl });
   res.status(201).json({
     status: 201,
     message: "Successfully created a contact!",
