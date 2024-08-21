@@ -21,3 +21,6 @@ export const contactUpdateSchema = Joi.object({
 
 
 })
+export const loginWithGoogleOAuthSchema = Joi.object({
+  code: Joi.string().required(),
+});

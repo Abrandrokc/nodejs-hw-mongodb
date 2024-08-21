@@ -1,0 +1,34 @@
+# swagger/components/schemas/student.yaml
+
+type: object
+required:
+  - _id
+  - name
+  - phoneNumber
+  - contactType
+properties:
+  _id:
+    description: 'contacts id'
+    type: string
+    example: 65e4decdd286b30065d54af9
+  name:
+    description: 'contacts name'
+    type: string
+    example: 'John Doe'
+  phoneNumber:
+    description: 'contacts phone number'
+    type: number
+    example: 121212121
+  email:
+    description: 'contacts email'
+    type: string
+    example: 'asasa.doe@example.com'
+  contactType:
+    description: 'CONTACT type'
+    type: string
+    enum: ['work', 'home', 'personal']
+    example: 'home'
+  photo:
+    description: 'Link to contacts photo'
+    type: string
+    example: <https://res.cloudinary.com/uqwgdu/image/upload/image.png>
