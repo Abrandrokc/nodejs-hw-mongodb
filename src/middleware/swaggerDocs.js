@@ -4,7 +4,7 @@ import fs from 'node:fs';
 
 import { SWAGGER_PATH } from '../controllers/const.js';
 
-const swaggerDocs = () => {
+export const swaggerDocs = () => {
   try {
     const swaggerDoc = JSON.parse(fs.readFileSync(SWAGGER_PATH).toString());
     return [...swaggerUI.serve, swaggerUI.setup(swaggerDoc)];
@@ -13,5 +13,3 @@ const swaggerDocs = () => {
       next(createHttpError(500, "Can't load swagger docs"));
   }
 };
-
-export default swaggerDocs;
