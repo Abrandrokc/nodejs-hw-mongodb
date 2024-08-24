@@ -8,6 +8,7 @@ import contactRouters from "./routers/contacts.js";
 import notFoundHandler from "./middleware/notFoundHandler.js";
 import errorHandler from "./middleware/errorHandler.js";
 import authRouter from "./routers/auth-router.js";
+import swaggerDocs from "./middleware/swaggerDocs.js";
 
 const port = env("PORT", "3000");
 
@@ -28,6 +29,7 @@ export default function setupServer() {
 
     app.use("/auth", authRouter);
     app.use("/contacts", contactRouters);
+     app.use("/api-docs", swaggerDocs());
     app.use(notFoundHandler);
     app.use(errorHandler);
     app.listen(port, () => console.log(`Server is running on port ${port} `));
