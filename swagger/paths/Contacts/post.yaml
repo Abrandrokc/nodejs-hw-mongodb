@@ -1,5 +1,5 @@
 tags:
-  - contacts
+  - Contacts
 summary: Create contacts
 operationId: createContacts
 description: 'Create a contact with payload'
@@ -35,7 +35,11 @@ requestBody:
           photo:
             description: 'Link to contact photo'
             type: string
-            example: 'https://res.cloudinary.com/uqwgdu/image/upload/image.png'
+            example: 'https://res.cloudinary.com/divut7dkh/image/upload/v1724141207/photo/w2…'
+          isFavourite:
+            description: 'favorite contact'
+            type: boolean
+            example: true
 responses:
   '201':
     description: Creates a contact

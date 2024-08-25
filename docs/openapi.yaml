@@ -9,8 +9,6 @@ info:
 tags:
   - name: Contacts
     description: Operotions about contacts.
-  - name: Auth
-    description: Auth operation.
 servers:
   - url: https://nodejs-hw-mongodb-2-dv3d.onrender.com
 paths:
