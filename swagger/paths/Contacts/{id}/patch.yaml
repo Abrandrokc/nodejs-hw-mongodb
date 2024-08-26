@@ -42,7 +42,7 @@ requestBody:
           isFavourite:
             description: 'favorite contact'
             type: boolean
-            example: true
+            example: false
 responses:
   '200':
     description: 'Successfully patched contact by id'

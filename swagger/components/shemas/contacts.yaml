@@ -18,7 +18,7 @@ properties:
   phoneNumber:
     description: 'contacts phone number'
     type: number
-    example: 1212125221
+    example: 12121252522521
   email:
     description: 'contacts email'
     type: string
@@ -33,6 +33,6 @@ properties:
     type: string
     example: 'https://res.cloudinary.com/divut7dkh/image/upload/v1724141207/photo/w2…'
   isFavourite:
-    description: 'favorite contact'
+    description: 'Favorite contact'
     type: boolean
     example: false

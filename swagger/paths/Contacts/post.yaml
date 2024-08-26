@@ -22,7 +22,7 @@ requestBody:
           phoneNumber:
             description: 'Contact phone number'
             type: number
-            example: 121212121
+            example: 12411212121
           email:
             description: 'Contact email'
             type: string
@@ -39,7 +39,7 @@ requestBody:
           isFavourite:
             description: 'favorite contact'
             type: boolean
-            example: true
+            example: false
 responses:
   '201':
     description: Creates a contact
