@@ -18,7 +18,7 @@ properties:
   phoneNumber:
     description: 'contacts phone number'
     type: number
-    example: 121212121
+    example: 1212125221
   email:
     description: 'contacts email'
     type: string
@@ -35,4 +35,4 @@ properties:
   isFavourite:
     description: 'favorite contact'
     type: boolean
-    example: true
+    example: false
