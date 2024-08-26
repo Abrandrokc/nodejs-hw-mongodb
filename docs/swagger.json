@@ -185,7 +185,7 @@
                   "isFavourite": {
                     "description": "favorite contact",
                     "type": "boolean",
-                    "example": true
+                    "example": false
                   }
                 }
               }
