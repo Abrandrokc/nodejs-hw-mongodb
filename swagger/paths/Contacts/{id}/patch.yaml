@@ -38,7 +38,7 @@ requestBody:
           photo:
             description: 'Link to contacts photo'
             type: string
-            example: 'https://res.cloudinary.com/divut7dkh/image/upload/v1724141207/photo/w2…'
+            example: 'https://res.cloudinary.com/divut7dkh/image/upload/v1723989142/photo/u9oxt6rid9rybztcms64.png'
           isFavourite:
             description: 'favorite contact'
             type: boolean
